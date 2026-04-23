@@ -1,0 +1,40 @@
+fundis_backend_v1/
+│
+├── apps/                        # BUSINESS DOMAIN
+│   ├── users/
+│   ├── profiles/
+│   ├── projects/
+│   └── core/
+│
+├── api/                         # API LAYER (versioned)
+│   └── v1/
+│       ├── urls.py
+│       ├── auth.py
+│       ├── users.py
+│       └── projects.py
+│
+├── services/                    # BUSINESS LOGIC (VERY IMPORTANT)
+│   ├── auth_service.py
+│   └── project_service.py
+│
+├── config/                      # DJANGO CORE
+│   ├── __init__.py
+│   ├── urls.py
+│   ├── asgi.py
+│   ├── wsgi.py
+│   │
+│   └── settings/
+│       ├── __init__.py
+│       ├── base.py
+│       ├── dev.py
+│       └── prod.py
+│
+├── common/                      # SHARED TOOLS
+│   ├── permissions.py
+│   ├── responses.py
+│   └── utils.py
+│
+├── .env
+├── manage.
+├── b_architechture.txt 
+└── requirements.txt
