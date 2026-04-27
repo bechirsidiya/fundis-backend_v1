@@ -2,23 +2,18 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from apps.users.serializers import RegisterSerializer, UserSerializer
-from apps.users.services import create_user
-
-from rest_framework_simplejwt.tokens import RefreshToken
+from services.auth_service import register_user
 
 
 class RegisterAPIView(APIView):
     def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        email = request.data.get("email")
+        username = request.data.get("username")
+        password = request.data.get("password")
 
-        user = create_user(**serializer.validated_data)
-
-        refresh = RefreshToken.for_user(user)
+        user = register_user(email, username, password)
 
         return Response({
-            "user": UserSerializer(user).data,
-            "access": str(refresh.access_token),
-            "refresh": str(refresh),
+            "id": user.id,
+            "email": user.email
         }, status=status.HTTP_201_CREATED)

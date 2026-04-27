@@ -1,14 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Auth + users
-    path('api/users/', include('apps.users.urls')),
+    path('api/v1/', include('api.v1.urls')),
 
-    # Projects
-
-    # JWT (simplejwt default endpoints)
-    path('api/token/', include('rest_framework_simplejwt.urls')),
 ]

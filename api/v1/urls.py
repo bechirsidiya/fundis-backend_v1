@@ -1,22 +1,17 @@
-from django.contrib import admin
-from .auth import RegisterAPIView  
-from django.urls import path, include
+from django.urls import path
+from .auth import RegisterAPIView
+from .projects import urlpatterns as project_urls
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # Auth
+    path('auth/register/', RegisterAPIView.as_view(), name='register'),
 
-    # Auth + users
-    path("auth/register/", RegisterAPIView.as_view()),
-    path("auth/login/", TokenObtainPairView.as_view()),
-    path("auth/refresh/", TokenRefreshView.as_view()),
-    # Projects
-
-    # JWT (simplejwt default endpoints)
-    path('api/token/', TokenObtainPairView.as_view()),
-    path('api/token/refresh/', TokenRefreshView.as_view()),
-
+    path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+urlpatterns += project_urls
